@@ -95,7 +95,7 @@ services:
       - /mnt/media/downloads:/downloads
     network_mode: container:vpn
     restart: unless-stopped
-    
+
   # Sonarr
   # --
   sonarr:
