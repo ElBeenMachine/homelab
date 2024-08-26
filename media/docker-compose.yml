@@ -144,8 +144,6 @@ services:
       - LOG_HTML=false
       - CAPTCHA_SOLVER=none
       - TZ=Europe/London
-    ports:
-      - 8191:8191
     network_mode: container:vpn
     restart: unless-stopped
 
