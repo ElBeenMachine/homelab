@@ -1,0 +1,42 @@
+---
+id: install-docker
+description: Flow to install docker on a server in the homelab
+namespace: beantech.homelab
+
+inputs:
+  - id: ip_address
+    type: STRING
+    required: true
+    description: "IP address of the server"
+
+tasks:
+  - id: setup
+    type: io.kestra.plugin.core.flow.WorkingDirectory
+    tasks:
+        - id: get_playbook 
+          type: io.kestra.plugin.core.http.Request
+          uri: https://raw.githubusercontent.com/ElBeenMachine/homelab/production/ansible/playbooks/servers/install-docker.yml
+
+        - id: local_files
+          type: io.kestra.plugin.core.storage.LocalFiles
+          inputs:
+            inventory.ini: |
+              [all]
+              {{ inputs.ip_address }}
+
+            playbook.yml: |
+              {{ outputs.get_playbook.body }}
+
+            id_rsa: "{{ kv('SSH_PRIVATE_KEY') }}"
+
+        - id: ansible_task
+          type: io.kestra.plugin.ansible.cli.AnsibleCLI
+          containerImage: cytopia/ansible:latest-tools
+          commands: 
+            - chmod 400 id_rsa
+            - ansible-playbook -i inventory.ini --key-file id_rsa playbook.yml
+
+          env: 
+            ANSIBLE_HOST_KEY_CHECKING: "False"
+            ANSIBLE_REMOTE_USER: "{{ kv('SSH_USER') }}"
+            SUDO_USER: "{{ kv('SSH_USER') }}"

@@ -1,0 +1,14 @@
+---
+# Docker Compose file for BIND9 DNS server
+
+services:
+  bind9:
+    container_name: dns-server
+    image: ubuntu/bind9:latest
+    environment:
+      - BIND9_USER=root
+      - TZ=Europe/London
+    volumes:
+      - ./config/:/etc/bind:rw
+    network_mode: host
+    restart: unless-stopped
