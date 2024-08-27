@@ -27,10 +27,6 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-      - 8112:8112 # Deluge
-      - 6881:6881 # Deluge
-      - 6881:6881/udp # Deluge
-      - 58846:58846 # Deluge
       - 9696:9696 # Prowlarr
       - 7878:7878 # Radarr
       - 8989:8989 # Sonarr
@@ -38,6 +34,8 @@ services:
       - 8191:8191 # Flaresolverr
       - 8181:8181 # Tautulli
       - 8080:8080 # qBittorrent
+      - 6881:6881 # qBittorrent
+      - 6881:6881/udp # qBittorrent
     volumes:
       - ./gluetun:/gluetun
     environment:
