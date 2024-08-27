@@ -2,21 +2,19 @@
 10.20.0.3
 
 [prod]
-srv-prod-01.home.beantech.uk
-srv-prod-02.home.beantech.uk
-srv-prod-03.home.beantech.uk
-automation.home.beantech.uk
-backup-web-server.home.beantech.uk
-automation.home.beantech.uk
-k3s-load-balancer.home.beantech.uk
+10.20.3.1
+10.20.3.2
+10.20.3.3
+10.20.3.10
+10.20.3.11
 
 [demo]
-srv-demo-01.home.beantech.uk
-srv-demo-02.home.beantech.uk
-srv-demo-03.home.beantech.uk
+10.20.2.1
+10.20.2.2
+10.20.2.3
 
 [k3s]
-k3s-node-01.home.beantech.uk
-k3s-node-02.home.beantech.uk
-k3s-node-03.home.beantech.uk
-k3s-node-04.home.beantech.uk
+10.20.4.11
+10.20.4.12
+10.20.4.13
+10.20.4.14
