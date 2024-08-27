@@ -14,7 +14,7 @@ resource "nginxproxymanager_proxy_host" "plex" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -37,7 +37,7 @@ resource "nginxproxymanager_proxy_host" "qbittorrent" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -60,7 +60,7 @@ resource "nginxproxymanager_proxy_host" "prowlarr" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -83,7 +83,7 @@ resource "nginxproxymanager_proxy_host" "radarr" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -106,7 +106,7 @@ resource "nginxproxymanager_proxy_host" "sonarr" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -129,7 +129,7 @@ resource "nginxproxymanager_proxy_host" "overseer" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -152,7 +152,7 @@ resource "nginxproxymanager_proxy_host" "tautulli" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true

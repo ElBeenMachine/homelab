@@ -1,0 +1,25 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+
+- DevOps:
+  - GitHub Profile:
+    - abbr: GH
+      icon: si-github-#FFFFFF
+      href: https://github.com/elbeenmachine
+
+  - Homelab Repo:
+    - abbr: HLR
+      icon: si-github-#FFFFFF
+      href: https://github.com/elbeenmachine/homelab
+
+- Cloud Providers:
+  - Azure:
+    - abbr: AZ
+      icon: azure.png
+      href: https://portal.azure.com
+
+  - Linode:
+    - abbr: LN
+      icon: linode.png
+      href: https://cloud.linode.com

@@ -12,7 +12,7 @@ resource "nginxproxymanager_proxy_host" "prx-prod-01" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -35,7 +35,7 @@ resource "nginxproxymanager_proxy_host" "prx-prod-02" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -58,7 +58,7 @@ resource "nginxproxymanager_proxy_host" "nas" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -81,7 +81,7 @@ resource "nginxproxymanager_proxy_host" "kestra" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
@@ -104,7 +104,30 @@ resource "nginxproxymanager_proxy_host" "semaphore" {
 
   access_list_id = 0 # Publicly Accessible
 
-  certificate_id  = 2
+  certificate_id  = 3
+  ssl_forced      = true
+  hsts_enabled    = true
+  hsts_subdomains = true
+  http2_support   = true
+
+  advanced_config = ""
+}
+
+# Homepage resource
+resource "nginxproxymanager_proxy_host" "homepage" {
+  domain_names = ["home.web.beantech.uk"]
+
+  forward_scheme = "http"
+  forward_host   = "10.20.3.1"
+  forward_port   = 3000
+
+  caching_enabled         = false
+  allow_websocket_upgrade = true
+  block_exploits          = true
+
+  access_list_id = 0 # Publicly Accessible
+
+  certificate_id  = 3
   ssl_forced      = true
   hsts_enabled    = true
   hsts_subdomains = true
