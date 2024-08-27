@@ -24,12 +24,12 @@ resource "nginxproxymanager_proxy_host" "plex" {
 }
 
 # Deluge resource
-resource "nginxproxymanager_proxy_host" "deluge" {
-  domain_names = ["deluge.web.beantech.uk"]
+resource "nginxproxymanager_proxy_host" "qbittorrent" {
+  domain_names = ["qbit.web.beantech.uk"]
 
   forward_scheme = "http"
   forward_host   = "10.20.3.2"
-  forward_port   = 8112
+  forward_port   = 8080
 
   caching_enabled         = false
   allow_websocket_upgrade = true
