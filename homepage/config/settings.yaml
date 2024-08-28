@@ -8,7 +8,7 @@ providers:
 
 title: BeanTech Homelab
 background: 
-  image: https://images.unsplash.com/photo-1683322499436-f4383dd59f5a
+  image: /images/background.png
   blur: sm
   saturate: 50
   brightness: 50
