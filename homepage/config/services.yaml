@@ -63,6 +63,17 @@
         description: My Radarr server
         siteMonitor: https://radarr.web.beantech.uk
 
+    - Tautulli:
+        icon: tautulli.png
+        href: https://tautulli.web.beantech.uk
+        description: My Tautulli server
+        siteMonitor: http://srv-prod-02.home.beantech.uk:8181
+        widget:
+            type: tautulli
+            url: https://tautulli.web.beantech.uk
+            key: e6403367b2894313a4130cbaa3607ae3
+            enableUser: true
+
 - Websites:
   - My Portfolio:
       href: https://www.beenhamow.co.uk
