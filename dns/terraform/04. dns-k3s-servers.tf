@@ -2,7 +2,7 @@
 
 resource "dns_a_record_set" "k3s_cluster" {
     zone        = "home.beantech.uk."
-    name        = "k3s"
+    name        = "k3s-cluster"
     addresses   = ["10.20.4.10"]
     ttl         = 300
 }
