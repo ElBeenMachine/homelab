@@ -3,40 +3,40 @@
 # https://gethomepage.dev/latest/configs/services
 
 - Infrastructure and Data:
-  - Proxmox Node 1:
-      icon: si-proxmox-#E57000
-      href: https://prx-prod-01.web.beantech.uk
-      description: My Proxmox cluster
-      siteMonitor: https://prx-prod-01.web.beantech.uk
-      widget:
-        type: proxmox
-        url: https://prx-prod-01.home.beantech.uk:8006
-        username: {{HOMEPAGE_VAR_PRX_USERNAME}}
-        password: {{HOMEPAGE_VAR_PRX_PASSWORD}}
-        node: prx-prod-01
+    - Proxmox Node 1:
+        icon: si-proxmox-#E57000
+        href: https://prx-prod-01.web.beantech.uk
+        description: My Proxmox cluster
+        siteMonitor: https://prx-prod-01.web.beantech.uk
+        widget:
+            type: proxmox
+            url: https://prx-prod-01.home.beantech.uk:8006
+            username: {{HOMEPAGE_VAR_PRX_USERNAME}}
+            password: {{HOMEPAGE_VAR_PRX_PASSWORD}}
+            node: prx-prod-01
 
-  - Proxmox Node 2:
-      icon: si-proxmox-#E57000
-      href: https://prx-prod-02.web.beantech.uk
-      description: My Proxmox cluster
-      siteMonitor: https://prx-prod-02.web.beantech.uk
-      widget:
-        type: proxmox
-        url: https://prx-prod-02.home.beantech.uk:8006
-        username: {{HOMEPAGE_VAR_PRX_USERNAME}}
-        password: {{HOMEPAGE_VAR_PRX_PASSWORD}}
-        node: prx-prod-02
+    - Proxmox Node 2:
+        icon: si-proxmox-#E57000
+        href: https://prx-prod-02.web.beantech.uk
+        description: My Proxmox cluster
+        siteMonitor: https://prx-prod-02.web.beantech.uk
+        widget:
+            type: proxmox
+            url: https://prx-prod-02.home.beantech.uk:8006
+            username: {{HOMEPAGE_VAR_PRX_USERNAME}}
+            password: {{HOMEPAGE_VAR_PRX_PASSWORD}}
+            node: prx-prod-02
   
-  - NAS Server:
-      icon: truenas.png
-      href: https://nasty.web.beantech.uk
-      description: My Proxmox cluster
-      siteMonitor: https://nasty.web.beantech.uk
-      widget:
-        type: truenas
-        url: https://nasty.web.beantech.uk
-        key: {{HOMEPAGE_VAR_TRUENAS_KEY}}
-        enablePools: true
+    - NAS Server:
+        icon: truenas.png
+        href: https://nasty.web.beantech.uk
+        description: My Proxmox cluster
+        siteMonitor: https://nasty.web.beantech.uk
+        widget:
+            type: truenas
+            url: https://nasty.web.beantech.uk
+            key: {{HOMEPAGE_VAR_TRUENAS_KEY}}
+            enablePools: true
 
 - Media and Entertainment:
     - Plex:
@@ -74,19 +74,30 @@
             key: e6403367b2894313a4130cbaa3607ae3
             enableUser: true
 
+- Development and DevOps:
+    - GitLab:
+        icon: gitlab.png
+        href: https://gitlab.web.beantech.uk
+        description: My GitLab server
+        siteMonitor: https://gitlab.web.beantech.uk
+
+    - Twingate:
+        icon: twingate.png
+        href: https://beantech.twingate.com
+        description: My Twingate tenant
+
 - Websites:
-  - My Portfolio:
-      href: https://www.beenhamow.co.uk
-      description: My personal portfolio
-      siteMonitor: https://www.beenhamow.co.uk
+    - My Portfolio:
+        href: https://www.beenhamow.co.uk
+        description: My personal portfolio
+        siteMonitor: https://www.beenhamow.co.uk
 
-  - SE Team Portfolio:
-      href: https://www.ljmu.dev
-      description: University SE team portfolio
-      siteMonitor: https://www.ljmu.dev
+    - SE Team Portfolio:
+        href: https://www.ljmu.dev
+        description: University SE team portfolio
+        siteMonitor: https://www.ljmu.dev
 
-  - Alice's Portfolio:
-      href: https://www.corkera.co.uk
-      description: Alice's personal portfolio
-      siteMonitor: https://www.corkers.co.uk
-
+    - Alice's Portfolio:
+        href: https://www.corkera.co.uk
+        description: Alice's personal portfolio
+        siteMonitor: https://www.corkers.co.uk
