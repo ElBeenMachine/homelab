@@ -135,3 +135,26 @@ resource "nginxproxymanager_proxy_host" "homepage" {
 
   advanced_config = ""
 }
+
+# Homepage resource
+resource "nginxproxymanager_proxy_host" "gitlab" {
+  domain_names = ["gitlab.web.beantech.uk"]
+
+  forward_scheme = "http"
+  forward_host   = "10.20.3.3"
+  forward_port   = 443
+
+  caching_enabled         = false
+  allow_websocket_upgrade = true
+  block_exploits          = true
+
+  access_list_id = 0 # Publicly Accessible
+
+  certificate_id  = 3
+  ssl_forced      = true
+  hsts_enabled    = true
+  hsts_subdomains = true
+  http2_support   = true
+
+  advanced_config = ""
+}
