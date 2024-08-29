@@ -9,6 +9,9 @@ services:
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'https://gitlab.web.beantech.uk'
+      ENTRA_CLIENT_ID:
+      ENTRA_CLIENT_SECRET: 
+      ENTRA_TENANT_ID: 
     ports:
       - 80:80
       - 443:443
