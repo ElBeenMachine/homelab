@@ -142,7 +142,7 @@ resource "nginxproxymanager_proxy_host" "gitlab" {
 
   forward_scheme = "http"
   forward_host   = "10.20.3.3"
-  forward_port   = 443
+  forward_port   = 80
 
   caching_enabled         = false
   allow_websocket_upgrade = true
