@@ -1,0 +1,66 @@
+---
+# Ansible playbook to install core dependencies on a server
+
+#     - Install ca-certificates and curl
+#     - Add Docker GPG key
+#     - Add Docker repository
+#     - Update apt cache
+#     - Install Docker
+#     - Add the current user to the docker group
+
+- hosts: all
+  become: yes
+
+  tasks:
+    # Install prerequisites
+    # --
+    - name: install prerequisites
+      apt:
+        name:
+          - ca-certificates
+          - curl
+        update_cache: yes
+
+    # Add Docker GPG key
+    # --
+    - name: add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    
+    # Add Docker repository
+    # --
+    - name: get ubuntu version
+      command: "lsb_release -cs"
+      register: ubuntu_version
+
+    # Add Docker repository
+    # --
+    - name: add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ubuntu_version.stdout }} stable"
+        state: present
+
+    # Update apt cache
+    # --
+    - name: update apt cache
+      apt:
+        update_cache: yes
+
+    # Install Docker
+    # --
+    - name: install Docker
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+          - docker-buildx-plugin
+        update_cache: yes
+
+    # Add user to docker group
+    # --
+    - name: add user permissions
+      shell: "usermod -aG docker {{ ansible_env.SUDO_USER }}"
+ 

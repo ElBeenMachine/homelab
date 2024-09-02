@@ -1,0 +1,12 @@
+---
+# A docker compose file for my homelab DHCP server
+
+services:
+  isc-dhcp-server:
+    image: networkboot/dhcpd
+    container_name: dhcpd-server
+    command: ens18
+    volumes:
+      - ./data:/data
+    network_mode: host
+    restart: always

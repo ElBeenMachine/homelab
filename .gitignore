@@ -1,0 +1,16 @@
+# Terraform Resources
+.terraform
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.terraform.lock.hcl
+named.conf.key
+
+# Cloudflare DNS token for traefik
+cf_dns_api_token.txt
+
+# Environmnt variables
+*.env
+
+# Homepage
+homepage/**/logs/

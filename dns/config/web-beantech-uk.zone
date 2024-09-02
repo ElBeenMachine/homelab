@@ -1,0 +1,16 @@
+$ORIGIN web.beantech.uk.
+$TTL 1d	; 1 day
+
+@					IN      SOA	    ns.web.beantech.uk.    hello.beenhamow.co.uk. (
+		    		                2024081200  ; serial
+		    		                1h        	; refresh (1 hour)
+		    		                1h        	; retry (1 hour)
+		    		                4w     		; expire (4 weeks)
+		    		                1h        	; minimum (1 hour)
+		    		                )
+
+	                IN		NS				ns.web.beantech.uk.
+
+ns              	IN      A       10.20.0.3
+
+*					IN		A		10.20.3.1

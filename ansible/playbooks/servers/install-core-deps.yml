@@ -1,0 +1,19 @@
+---
+# Ansible playbook to install core dependencies on a server
+
+#     - Git
+#     - Net-tools
+
+- hosts: all
+  become: yes
+
+  tasks:
+    # Install core dependencies
+    # --
+    - name: install dependencies
+      apt:
+        name: 
+          - git
+          - net-tools
+        state: present
+        update_cache: yes

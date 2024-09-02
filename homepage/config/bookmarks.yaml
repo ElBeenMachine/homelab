@@ -1,0 +1,38 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+
+- Development:
+  - GitHub Profile:
+    - abbr: GH
+      icon: si-github-#FFFFFF
+      href: https://github.com/elbeenmachine
+  - University GitHub Profile:
+    - abbr: GH
+      icon: si-github-#FFFFFF
+      href: https://github.com/ljmu-se
+
+- DevOps:
+  - Kestra:
+    - abbr: KS
+      icon: kestra.png
+      href: https://kestra.web.beantech.uk
+  - Semaphore:
+    - abbr: SM
+      icon: semaphore.png
+      href: https://semaphore.web.beantech.uk
+  - Homelab Repo:
+    - abbr: HLR
+      icon: si-github-#FFFFFF
+      href: https://github.com/elbeenmachine/homelab
+
+- Cloud Providers:
+  - Azure:
+    - abbr: AZ
+      icon: azure.png
+      href: https://portal.azure.com
+
+  - Linode:
+    - abbr: LN
+      icon: linode.png
+      href: https://cloud.linode.com

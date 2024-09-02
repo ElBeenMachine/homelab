@@ -1,0 +1,8 @@
+# Template
+
+# resource "dns_a_record_set" "example" {
+#     zone        = "home.beantech.uk."
+#     name        = "example"
+#     addresses   = ["10.20.0.1"]
+#     ttl         = 300
+# }

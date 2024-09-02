@@ -1,0 +1,168 @@
+---
+# Docker compose file for all of my media needs
+
+services:
+  # Plex
+  # --
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - TZ=Europe/London
+      - VERSION=docker
+    devices:
+     - /dev/dri:/dev/dri
+    volumes:
+      - ./plex/config:/config
+      - /mnt/media/tv:/tv
+      - /mnt/media/movies:/movies
+    restart: unless-stopped
+
+  # Gluetun
+  # --
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 9696:9696 # Prowlarr
+      - 7878:7878 # Radarr
+      - 8989:8989 # Sonarr
+      - 5055:5055 # Overseer
+      - 8191:8191 # Flaresolverr
+      - 8080:8080 # qBittorrent
+      - 6881:6881 # qBittorrent
+      - 6881:6881/udp # qBittorrent
+    volumes:
+      - ./gluetun:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - OPENVPN_USER=
+      - OPENVPN_PASSWORD=
+      - SERVER_REGIONS=Netherlands
+    restart: unless-stopped
+
+  # qBittorrent
+  # --
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+    volumes:
+      - ./qbittorrent/config:/config
+      - /mnt/media/downloads:/downloads
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Prowlarr
+  # --
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    depends_on:
+      - gluetun
+      - flaresolverr
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - ./prowlarr/config:/config
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Radarr
+  # --
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    depends_on:
+      - gluetun
+      - qbittorrent
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - ./radarr/config:/config
+      - /mnt/media/movies:/movies
+      - /mnt/media/downloads:/downloads
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Sonarr
+  # --
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    depends_on:
+      - gluetun
+      - qbittorrent
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - ./sonarr/config:/config
+      - /mnt/media/tv:/tv
+      - /mnt/media/downloads:/downloads
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Overseer
+  # --
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - ./overseer/config:/config
+      - /mnt/media:/share
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Flaresolerr
+  # --
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    depends_on:
+      - gluetun
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=Europe/London
+    network_mode: container:vpn
+    restart: unless-stopped
+
+  # Tautulli
+  # --
+  tautulli:
+    image: lscr.io/linuxserver/tautulli:latest
+    container_name: tautulli
+    depends_on:
+      - plex
+    ports:
+      - 8181:8181
+    environment:
+      - PUID=1001
+      - PGID=1001
+      - TZ=Europe/London
+    volumes:
+      - ./tautulli:/config
+    restart: unless-stopped

@@ -1,0 +1,114 @@
+---
+# Ansible playbook to initialize a new server in the homelab
+
+#     - Configure sudo user
+#     - Install public keys
+#     - Modify SSH config
+#     - Set all sudoers to no password
+#     - Install netplan if not installed
+#     - Configure static IP with netplan
+#     - Set permissions for netplan file to 400
+#     - Drop cloud-init network config file
+#     - Apply netplan configuration
+
+- hosts: all
+  become: yes
+
+  tasks:
+    # Create new sudo user
+    # --
+    - name: create sudo user
+      user:
+        name: "{{ lookup('ansible.builtin.env', 'SSH_USER') }}"
+        password: "{{ lookup('ansible.builtin.env', 'SSH_PASS') }}"
+        groups: sudo
+        append: yes
+        shell: /bin/bash
+        update_password: on_create
+
+    # Deploy SSH Key
+    # --
+    - name: install public keys
+      authorized_key:
+        user: "{{ lookup('ansible.builtin.env', 'SSH_USER') }}"
+        state: present
+        key: "{{ lookup('ansible.builtin.env', 'SSH_PUBLIC_KEY') }}"
+
+    # Modify SSH config
+    # --
+    - name: Configure sshd
+      lineinfile:
+        path: "/etc/ssh/sshd_config"
+        regex: "^(#)?{{item.key}}"
+        line: "{{item.key}} {{item.value}}"
+        state: present
+      loop:
+        - { key: "PermitRootLogin", value: "no" }
+        - { key: "PasswordAuthentication", value: "no" } 
+        - { key: "PubkeyAuthentication", value: "yes" }
+    
+    # Set all sudoers to no password
+    # --
+    - name: change sudoers file
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: /usr/sbin/visudo -cf %s
+    
+    # Install netplan if not installed
+    # --
+    - name: install netplan
+      apt:
+        name: netplan.io
+        state: present
+      
+    # Configure static IP with netplan
+    # --
+    - name: configure static ip
+      copy:
+        dest: /etc/netplan/01-netcfg.yaml
+        content: |
+          network:
+            version: 2
+            ethernets:
+              eth0:
+                dhcp4: no
+                dhcp6: no
+                addresses: [{{ lookup('ansible.builtin.env', 'NEW_IP') }}/16]
+                nameservers:
+                  addresses: [10.20.0.3, 8.8.8.8, 8.8.4.4]
+                routes:
+                  - to: default
+                    via: 10.20.0.1
+              ens18:
+                dhcp4: no
+                dhcp6: no
+                addresses: [{{ lookup('ansible.builtin.env', 'NEW_IP') }}/16]
+                nameservers:
+                  addresses: [10.20.0.3, 8.8.8.8, 8.8.4.4]
+                routes:
+                  - to: default
+                    via: 10.20.0.1
+
+    # Set permissions for netplan file to 400
+    # --
+    - name: set netplan permissions
+      file:
+        path: /etc/netplan/01-netcfg.yaml
+        mode: 0400
+
+    # Drop cloud-init network config file
+    # --
+    - name: drop cloud-init config
+      ansible.builtin.file:
+        state: absent
+        path: /etc/netplan/50-cloud-init.yaml
+
+    # Apply netplan configuration
+    # --
+    - name: apply configuration      
+      command: netplan apply
+      async: 45
+      poll: 0
