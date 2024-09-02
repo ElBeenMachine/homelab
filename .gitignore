@@ -14,3 +14,5 @@ cf_dns_api_token.txt
 
 # Homepage
 homepage/**/logs/
+
+.vscode
