@@ -41,3 +41,10 @@ resource "dns_a_record_set" "automation_server" {
     addresses   = ["10.20.3.11"]
     ttl         = 300
 }
+
+resource "dns_a_record_set" "k3s_load_balancer" {
+    zone        = "home.beantech.uk."
+    name        = "k3s-load-balancer"
+    addresses   = ["10.20.3.12"]
+    ttl         = 300
+}
