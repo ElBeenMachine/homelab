@@ -6,7 +6,6 @@ srv-prod-01.home.beantech.uk
 srv-prod-02.home.beantech.uk
 srv-prod-03.home.beantech.uk
 backup-web-server.home.beantech.uk
-k3s-load-balancer.home.beantech.uk
 
 [demo]
 srv-demo-01.home.beantech.uk
