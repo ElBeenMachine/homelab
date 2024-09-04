@@ -72,7 +72,7 @@ resource "nginxproxymanager_proxy_host" "kestra" {
   domain_names = ["kestra.web.beantech.uk"]
 
   forward_scheme = "http"
-  forward_host   = "10.20.3.11"
+  forward_host   = "10.20.3.1"
   forward_port   = 8080
 
   caching_enabled         = false
