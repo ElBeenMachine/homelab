@@ -95,7 +95,7 @@ resource "nginxproxymanager_proxy_host" "semaphore" {
   domain_names = ["semaphore.web.beantech.uk"]
 
   forward_scheme = "http"
-  forward_host   = "10.20.3.11"
+  forward_host   = "10.20.3.1"
   forward_port   = 8082
 
   caching_enabled         = false
