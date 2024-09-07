@@ -1,0 +1,156 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: bind9
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: bind9
+    namespace: bind9
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: bind9
+    template:
+        metadata:
+            namespace: bind9
+            labels:
+                app: bind9
+        spec:
+            containers:
+                - name: bind9
+                  image: ubuntu/bind9:latest
+                  volumeMounts:
+                      - name: bind9-config
+                        mountPath: /etc/bind
+                  env:
+                      - name: BIND9_USER
+                        value: root
+                      - name: TZ
+                        value: Europe/London
+                  ports:
+                      - containerPort: 53
+                        protocol: TCP
+                      - containerPort: 53
+                        protocol: UDP
+                  resources:
+                      limits:
+                          cpu: 100m
+                          memory: 128Mi
+            volumes:
+                - name: bind9-config
+                  configMap:
+                      name: bind9-config
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxUnavailable: 1
+            maxSurge: 1
+    tolerations:
+        - key: "node.kubernetes.io/unreachable"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 10
+        - key: "node.kubernetes.io/not-ready"
+          operator: "Exists"
+          effect: "NoExecute"
+          tolerationSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: bind9
+    namespace: bind9
+spec:
+    type: LoadBalancer
+    loadBalancerIP: 10.20.0.2
+    selector:
+        app: bind9
+    ports:
+        - name: dns-data
+          protocol: TCP
+          port: 53
+          targetPort: 53
+        - name: dns-query
+          protocol: UDP
+          port: 53
+          targetPort: 53
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: bind9-config
+    namespace: bind9
+data:
+    named.conf: |
+        acl internal {
+            10.0.0.0/8;
+        };
+
+        acl ad {
+            10.20.1.1;
+            10.20.1.2;
+        };
+
+        masters ad {
+            10.20.1.1;
+            10.20.1.2;
+        };
+
+        options {
+            directory "/var/cache/bind";
+
+            dnssec-validation auto;
+
+            listen-on-v6 { any; };
+
+            forwarders {
+                8.8.8.8;
+                8.8.4.4;
+            };
+
+            allow-query {
+                internal;
+            };
+        };
+
+        zone "ad.beantech.uk" {
+            type slave;
+
+            masters {
+                ad;
+            };
+            
+            notify yes;
+
+            allow-transfer {
+                any;
+            };
+            
+            allow-query {
+                any;
+            };
+        };
+
+        zone "_msdcs.ad.beantech.uk" {
+            type slave;
+
+            masters {
+                ad;
+            };
+            
+            notify yes;
+
+            allow-transfer {
+                any;
+            };
+            
+            allow-query {
+                any;
+            };
+        };
