@@ -34,3 +34,10 @@ resource "dns_a_record_set" "win11_client" {
     addresses   = ["10.20.1.5"]
     ttl         = 300
 }
+
+resource "dns_a_record_set" "nfs_server" {
+    zone        = "home.beantech.uk."
+    name        = "nfs"
+    addresses   = ["10.20.1.6"]
+    ttl         = 300
+}
