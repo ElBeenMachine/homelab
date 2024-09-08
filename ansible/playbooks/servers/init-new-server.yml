@@ -78,7 +78,7 @@
                       dhcp6: no
                       addresses: [{{ lookup('ansible.builtin.env', 'NEW_IP') }}/16]
                       nameservers:
-                        addresses: [10.20.0.1, 10.20.0.2, 10.20.0.3]
+                        addresses: [10.20.0.2, 10.20.0.3]
                       routes:
                         - to: default
                           via: 10.20.0.1
@@ -87,7 +87,7 @@
                       dhcp6: no
                       addresses: [{{ lookup('ansible.builtin.env', 'NEW_IP') }}/16]
                       nameservers:
-                        addresses: [10.20.0.1, 10.20.0.2, 10.20.0.3]
+                        addresses: [10.20.0.2, 10.20.0.3]
                       routes:
                         - to: default
                           via: 10.20.0.1
