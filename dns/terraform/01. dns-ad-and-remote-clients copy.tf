@@ -35,9 +35,9 @@ resource "dns_a_record_set" "win11_client" {
     ttl         = 300
 }
 
-resource "dns_a_record_set" "nfs_server" {
+resource "dns_a_record_set" "k3s_storage" {
     zone        = "home.beantech.uk."
-    name        = "nfs"
+    name        = "k3s-storage"
     addresses   = ["10.20.1.6"]
     ttl         = 300
 }
