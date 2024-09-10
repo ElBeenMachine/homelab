@@ -15,19 +15,8 @@ variable "TSIG_KEY" {
 }
 
 provider "dns" {
-  alias = "dns-prod-01"
   update {
     server        = "10.20.0.2"
-    key_name      = "tsig-key."
-    key_algorithm = "hmac-sha256"
-    key_secret    = var.TSIG_KEY
-  }
-}
-
-provider "dns" {
-  alias = "dns-prod-02"
-  update {
-    server        = "10.20.0.3"
     key_name      = "tsig-key."
     key_algorithm = "hmac-sha256"
     key_secret    = var.TSIG_KEY
