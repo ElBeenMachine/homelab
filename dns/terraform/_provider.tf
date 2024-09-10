@@ -14,7 +14,16 @@ variable "TSIG_KEY" {
   sensitive = true
 }
 
-provider "dns" {
+provider "dns-1" {
+  update {
+    server        = "10.20.0.2"
+    key_name      = "tsig-key."
+    key_algorithm = "hmac-sha256"
+    key_secret    = var.TSIG_KEY
+  }
+}
+
+provider "dns-2" {
   update {
     server        = "10.20.0.3"
     key_name      = "tsig-key."
