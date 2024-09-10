@@ -8,12 +8,13 @@
   become: yes
 
   tasks:
-    # Install core dependencies
-    # --
-    - name: install dependencies
-      apt:
-        name: 
-          - git
-          - net-tools
-        state: present
-        update_cache: yes
+      # Install core dependencies
+      # --
+      - name: install dependencies
+        apt:
+            name:
+                - git
+                - net-tools
+                - nfs-common
+            state: present
+            update_cache: yes
