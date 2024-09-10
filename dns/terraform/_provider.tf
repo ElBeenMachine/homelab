@@ -14,7 +14,7 @@ variable "TSIG_KEY" {
   sensitive = true
 }
 
-provider "dns-1" {
+provider "dns" {
   update {
     server        = "10.20.0.2"
     key_name      = "tsig-key."
@@ -23,7 +23,7 @@ provider "dns-1" {
   }
 }
 
-provider "dns-2" {
+provider "dns" {
   update {
     server        = "10.20.0.3"
     key_name      = "tsig-key."
