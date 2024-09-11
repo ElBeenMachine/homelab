@@ -11,7 +11,7 @@ metadata:
     name: bind9
     namespace: bind9
 spec:
-    replicas: 4
+    replicas: 1
     selector:
         matchLabels:
             app: bind9
@@ -43,8 +43,9 @@ spec:
                           memory: 128Mi
             volumes:
                 - name: bind9-config
-                  configMap:
-                      name: bind9-config
+                  nfs:
+                      server: 10.20.1.6
+                      path: /mnt/nfs/dns-share
             tolerations:
                 - key: "node.kubernetes.io/unreachable"
                   operator: "Exists"
@@ -80,78 +81,3 @@ spec:
           protocol: UDP
           port: 53
           targetPort: 53
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-    name: bind9-config
-    namespace: bind9
-data:
-    named.conf: |
-        acl internal {
-            10.0.0.0/8;
-        };
-
-        acl ad {
-            10.20.1.1;
-            10.20.1.2;
-        };
-
-        masters ad {
-            10.20.1.1;
-            10.20.1.2;
-        };
-
-        options {
-            directory "/var/cache/bind";
-
-            dnssec-validation auto;
-
-            listen-on-v6 { any; };
-
-            forwarders {
-                8.8.8.8;
-                8.8.4.4;
-            };
-
-            allow-query {
-                internal;
-            };
-        };
-
-        zone "ad.beantech.uk" {
-            type slave;
-
-            masters {
-                ad;
-            };
-            
-            notify yes;
-
-            allow-transfer {
-                any;
-            };
-            
-            allow-query {
-                any;
-            };
-        };
-
-        zone "_msdcs.ad.beantech.uk" {
-            type slave;
-
-            masters {
-                ad;
-            };
-            
-            notify yes;
-
-            allow-transfer {
-                any;
-            };
-            
-            allow-query {
-                any;
-            };
-        };
