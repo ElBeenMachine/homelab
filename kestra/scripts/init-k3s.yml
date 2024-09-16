@@ -47,6 +47,8 @@ tasks:
                 - ansible-playbook -i inventory.ini playbook.yml
             env:
                 ANSIBLE_HOST_KEY_CHECKING: "False"
+                ANSIBLE_REMOTE_USER: "{{ kv('SSH_USER') }}"
+                SUDO_USER: "{{ kv('SSH_USER') }}"
                 SSH_USER: "{{ kv('SSH_USER') }}"
                 SSH_PASS: "{{ kv('SSH_PASS') }}"
                 SSH_PUBLIC_KEY: "{{ kv('SSH_PUBLIC_KEY') }}"
