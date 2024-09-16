@@ -33,13 +33,10 @@ tasks:
                     [all]
                     {{ inputs.ip_address }}
 
-                    [all:vars]
-                    ansible_user={{ kv('ANSIBLE_FALLBACK_USER') }}
-                    ansible_password={{ kv('ANSIBLE_FALLBACK_PASS') }}
-                    ansible_sudo_pass={{ kv('ANSIBLE_FALLBACK_PASS') }}
-
                 playbook.yml: |
                     {{ outputs.get_playbook.body }}
+
+                id_rsa: "{{ kv('SSH_PRIVATE_KEY') }}"
 
           - id: ansible_task
             type: io.kestra.plugin.ansible.cli.AnsibleCLI
