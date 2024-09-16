@@ -44,7 +44,7 @@ tasks:
             containerImage: cytopia/ansible:latest-infra
 
             commands:
-                - ansible-playbook -i inventory.ini playbook.yml --key-file id_rsa playbook.yml
+                - ansible-playbook -i inventory.ini --key-file id_rsa playbook.yml playbook.yml
             env:
                 ANSIBLE_HOST_KEY_CHECKING: "False"
                 ANSIBLE_REMOTE_USER: "{{ kv('SSH_USER') }}"
