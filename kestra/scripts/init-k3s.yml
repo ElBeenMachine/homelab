@@ -1,0 +1,56 @@
+---
+id: init_new_server
+description: Flow to install the core deps and initialize a new server in the homelab
+namespace: beantech.homelab
+
+inputs:
+    - id: ip_address
+      type: STRING
+      required: true
+      description: "IP address of the server"
+
+    - id: new_ip_address
+      type: STRING
+      required: true
+      description: "New IP Address"
+
+tasks:
+    - id: output
+      type: io.kestra.plugin.core.log.Log
+      message: "Setting up server with the IP address of {{ inputs.ip_address }}"
+
+    - id: setup
+      type: io.kestra.plugin.core.flow.WorkingDirectory
+      tasks:
+          - id: get_playbook
+            type: io.kestra.plugin.core.http.Request
+            uri: https://raw.githubusercontent.com/ElBeenMachine/homelab/production/ansible/playbooks/servers/init-k3s.yml
+
+          - id: local_files
+            type: io.kestra.plugin.core.storage.LocalFiles
+            inputs:
+                inventory.ini: |
+                    [all]
+                    {{ inputs.ip_address }}
+
+                    [all:vars]
+                    ansible_user={{ kv('ANSIBLE_FALLBACK_USER') }}
+                    ansible_password={{ kv('ANSIBLE_FALLBACK_PASS') }}
+                    ansible_sudo_pass={{ kv('ANSIBLE_FALLBACK_PASS') }}
+
+                playbook.yml: |
+                    {{ outputs.get_playbook.body }}
+
+          - id: ansible_task
+            type: io.kestra.plugin.ansible.cli.AnsibleCLI
+
+            containerImage: cytopia/ansible:latest-infra
+
+            commands:
+                - ansible-playbook -i inventory.ini playbook.yml
+            env:
+                ANSIBLE_HOST_KEY_CHECKING: "False"
+                SSH_USER: "{{ kv('SSH_USER') }}"
+                SSH_PASS: "{{ kv('SSH_PASS') }}"
+                SSH_PUBLIC_KEY: "{{ kv('SSH_PUBLIC_KEY') }}"
+                NEW_IP: "{{ inputs.new_ip_address }}"
