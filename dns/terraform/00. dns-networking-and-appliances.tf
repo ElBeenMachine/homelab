@@ -6,9 +6,9 @@ resource "dns_a_record_set" "netgear_router" {
     addresses   = ["10.20.0.1"]
     ttl         = 300
 }
-resource "dns_a_record_set" "networking_master" {
+resource "dns_a_record_set" "backup_dns" {
     zone        = "home.beantech.uk."
-    name        = "networking-master"
+    name        = "backup-dns"
     addresses   = ["10.20.0.3"]
     ttl         = 300
 }
