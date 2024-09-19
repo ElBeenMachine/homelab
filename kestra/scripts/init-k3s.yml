@@ -44,6 +44,7 @@ tasks:
             containerImage: cytopia/ansible:latest-infra
 
             commands:
+                - chmod 400 id_rsa
                 - ansible-playbook -i inventory.ini --key-file id_rsa playbook.yml playbook.yml
             env:
                 ANSIBLE_HOST_KEY_CHECKING: "False"

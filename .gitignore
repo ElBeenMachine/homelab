@@ -16,3 +16,4 @@ cf_dns_api_token.txt
 homepage/**/logs/
 
 .vscode
+.DS_STORE
