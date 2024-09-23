@@ -2,6 +2,7 @@
 # Playbook to check and notify me if disk space is over 80%
 
 - hosts:
+      - core
       - prod
       - k3s
 
