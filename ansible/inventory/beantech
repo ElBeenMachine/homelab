@@ -1,5 +1,5 @@
 [core]
-networking-master.home.beantech.uk
+backup-dns.home.beantech.uk
 
 [prod]
 srv-prod-01.home.beantech.uk
