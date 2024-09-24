@@ -35,7 +35,7 @@ resource "dns_a_record_set" "backup_web_server" {
     ttl         = 300
 }
 
-resource "dns_a_record_set" "gitlab_runners" {
+resource "dns_a_record_set" "gitlab_runner_prod" {
     zone        = "home.beantech.uk."
     name        = "gitlab-runner-prod"
     addresses   = ["10.20.3.11"]
