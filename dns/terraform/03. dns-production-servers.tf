@@ -35,16 +35,9 @@ resource "dns_a_record_set" "backup_web_server" {
     ttl         = 300
 }
 
-resource "dns_a_record_set" "automation_server" {
+resource "dns_a_record_set" "gitlab_runners" {
     zone        = "home.beantech.uk."
-    name        = "automation"
+    name        = "gitlab-runner-prod"
     addresses   = ["10.20.3.11"]
-    ttl         = 300
-}
-
-resource "dns_a_record_set" "k3s_load_balancer" {
-    zone        = "home.beantech.uk."
-    name        = "k3s-load-balancer"
-    addresses   = ["10.20.3.12"]
     ttl         = 300
 }
