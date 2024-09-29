@@ -41,10 +41,3 @@ resource "dns_a_record_set" "k3s_storage" {
     addresses   = ["10.20.1.6"]
     ttl         = 300
 }
-
-resource "dns_a_record_set" "gitlab_runners" {
-    zone        = "home.beantech.uk."
-    name        = "gitlab-runners"
-    addresses   = ["10.20.1.7"]
-    ttl         = 300
-}

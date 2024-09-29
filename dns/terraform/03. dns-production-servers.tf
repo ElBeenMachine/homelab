@@ -41,3 +41,10 @@ resource "dns_a_record_set" "gitlab_runner_prod" {
     addresses   = ["10.20.3.11"]
     ttl         = 300
 }
+
+resource "dns_a_record_set" "prometheus_server" {
+    zone        = "home.beantech.uk."
+    name        = "prometheus"
+    addresses   = ["10.20.3.12"]
+    ttl         = 300
+}
