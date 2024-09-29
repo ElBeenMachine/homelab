@@ -7,6 +7,7 @@ srv-prod-02.home.beantech.uk
 srv-prod-03.home.beantech.uk
 backup-web-server.home.beantech.uk
 gitlab-runner-prod.home.beantech.uk
+prometheus.home.beantech.uk
 
 [demo]
 srv-demo-01.home.beantech.uk
