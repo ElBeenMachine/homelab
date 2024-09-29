@@ -158,3 +158,49 @@ resource "nginxproxymanager_proxy_host" "gitlab" {
 
   advanced_config = ""
 }
+
+# Prometheus resource
+resource "nginxproxymanager_proxy_host" "prometheus" {
+  domain_names = ["prometheus.web.beantech.uk"]
+
+  forward_scheme = "http"
+  forward_host   = "10.20.3.12"
+  forward_port   = 9090
+  
+  caching_enabled         = false
+  allow_websocket_upgrade = true
+  block_exploits          = true
+
+  access_list_id = 0 # Publicly Accessible
+
+  certificate_id  = 3
+  ssl_forced      = true
+  hsts_enabled    = true
+  hsts_subdomains = true
+  http2_support   = true
+
+  advanced_config = ""
+}
+
+# Grafana resource
+resource "nginxproxymanager_proxy_host" "grafana" {
+  domain_names = ["grafana.web.beantech.uk"]
+
+  forward_scheme = "http"
+  forward_host   = "10.20.3.12"
+  forward_port   = 3000
+
+  caching_enabled         = false
+  allow_websocket_upgrade = true
+  block_exploits          = true
+
+  access_list_id = 0 # Publicly Accessible
+
+  certificate_id  = 3
+  ssl_forced      = true
+  hsts_enabled    = true
+  hsts_subdomains = true
+  http2_support   = true
+
+  advanced_config = ""
+}
