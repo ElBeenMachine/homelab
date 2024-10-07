@@ -14,6 +14,13 @@ resource "dns_a_record_set" "srv_prod_02" {
     ttl         = 300
 }
 
+resource "dns_a_record_set" "srv_prod_04" {
+    zone        = "home.beantech.uk."
+    name        = "srv-prod-04"
+    addresses   = ["10.20.3.4"]
+    ttl         = 300
+}
+
 resource "dns_a_record_set" "srv_prod_03" {
     zone        = "home.beantech.uk."
     name        = "srv-prod-03"
