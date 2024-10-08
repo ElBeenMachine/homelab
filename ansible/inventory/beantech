@@ -8,7 +8,6 @@ srv-prod-03.home.beantech.uk
 srv-prod-04.home.beantech.uk
 
 [k3s]
-k3s-storage.home.beantech.uk
 k3s-node-01.home.beantech.uk
 k3s-node-02.home.beantech.uk
 k3s-node-03.home.beantech.uk
