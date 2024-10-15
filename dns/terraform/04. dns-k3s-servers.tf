@@ -1,5 +1,12 @@
 # Kubernetes Cluster
 
+resource "dns_a_record_set" "k3s_global" {
+    zone        = "home.beantech.uk."
+    name        = "k3s"
+    addresses   = ["10.20.4.11", "10.20.4.12", "10.20.4.13", "10.20.4.14"]
+    ttl         = 300
+}
+
 resource "dns_a_record_set" "k3s_cluster" {
     zone        = "home.beantech.uk."
     name        = "k3s-cluster"
