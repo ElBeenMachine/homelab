@@ -3,7 +3,6 @@ backup-dns.home.beantech.uk
 
 [prod]
 srv-prod-01.home.beantech.uk
-srv-prod-02.home.beantech.uk
 srv-prod-03.home.beantech.uk
 srv-prod-04.home.beantech.uk
 
