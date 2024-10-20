@@ -16,7 +16,7 @@ variable "TSIG_KEY" {
 
 provider "dns" {
   update {
-    server        = "10.20.0.2"
+    server        = "10.20.0.3"
     key_name      = "tsig-key."
     key_algorithm = "hmac-sha256"
     key_secret    = var.TSIG_KEY

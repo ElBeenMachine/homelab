@@ -1,0 +1,15 @@
+---
+# Uptime Kuma
+
+volumes:
+    uptime-kuma:
+
+services:
+    uptime-kuma:
+        image: louislam/uptime-kuma:latest
+        container_name: uptime-kuma
+        restart: always
+        ports:
+            - 3005:3001
+        volumes:
+            - uptime-kuma:/app/data
