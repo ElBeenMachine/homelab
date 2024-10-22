@@ -1,5 +1,5 @@
 ---
-id: init_new_server
+id: init_new_k3s_server
 description: Flow to install the core deps and initialize a new server in the homelab
 namespace: beantech.homelab
 

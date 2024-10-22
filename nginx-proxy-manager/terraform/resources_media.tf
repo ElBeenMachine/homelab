@@ -5,7 +5,7 @@ resource "nginxproxymanager_proxy_host" "plex" {
   domain_names = ["plex.web.beantech.uk"]
 
   forward_scheme = "http"
-  forward_host   = "10.20.3.2"
+  forward_host   = "10.20.1.3"
   forward_port   = 32400
 
   caching_enabled         = false
