@@ -41,3 +41,10 @@ resource "dns_a_record_set" "k3s_storage" {
     addresses   = ["10.20.1.6"]
     ttl         = 300
 }
+
+resource "dns_a_record_set" "win10_client" {
+    zone        = "home.beantech.uk."
+    name        = "win10"
+    addresses   = ["10.20.1.7"]
+    ttl         = 300
+}
